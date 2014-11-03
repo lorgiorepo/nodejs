@@ -3,6 +3,7 @@
  */
 module.exports = function(app){
     var SerieTV = require('../models/serietv');
+    var authController = require('../controllers/auth');
 
     // GET
     findAllSeriesTV = function(req, res){
@@ -69,9 +70,9 @@ module.exports = function(app){
     };
 
     // API ROUTES
-    app.get('/seriestv', findAllSeriesTV);
-    app.get('/seriestv/:id', findBYID);
-    app.post('/seriestv', addSerieTV);
-    app.put('/seriestv/:id', updateSerieTV);
-    app.delete('/seriestv/:id', deleteSerieTV);
+    app.get('/seriestv', authController.isAuthenticated, findAllSeriesTV);
+    app.get('/seriestv/:id', authController.isAuthenticated,  findBYID);
+    app.post('/seriestv', authController.isAuthenticated,  addSerieTV);
+    app.put('/seriestv/:id', authController.isAuthenticated,  updateSerieTV);
+    app.delete('/seriestv/:id', authController.isAuthenticated,  deleteSerieTV);
 }
