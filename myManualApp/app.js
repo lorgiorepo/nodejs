@@ -10,13 +10,37 @@ app.set('view engine', 'jade');
 app.use(express.bodyParser());
 
 app.get('/', function(request, response){
+	// Getting the user-agent
+	console.log(request.get('user-agent'));
+	// Getting content-types accepted
+	console.log(request.accepted);
+	// Getting character sets
+	console.log(request.acceptedCharsets);
+	// Geeting accepted languages
+	console.log(request.acceptsLanguage('es') ? 'yes' : 'no');
 	response.render('index', {
 		title: 'Hello Express!',
 		username: 'Lorgio'
 	});
 });
 
+app.get('/prohibited', function(request, response){
+	response.send(403, 'Access Denied');
+});
+
+app.get('/info', function(request, response){
+	response.json({message: 'Hello from json'});
+});
+
 app.get('/users/:username', function(request, response){
+	// Getting the user-agent
+	console.log(request.get('user-agent'));
+	// Getting content-types accepted
+	console.log(request.accepted);
+	// Getting character sets
+	console.log(request.acceptedCharsets);
+	// Geeting accepted languages
+	console.log(request.acceptsLanguage('es') ? 'yes' : 'no');
 	var name = request.params.username;
 	response.send('Hola! ' + name + ' !');
 });
