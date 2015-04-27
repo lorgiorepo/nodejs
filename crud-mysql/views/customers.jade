@@ -1,0 +1,7 @@
+extends layout
+
+block content
+	ul
+		each customer in data
+			li #{customer.name} #{customer.address}
+				p(style="margin-left:5px")=customer.phone
